@@ -4,7 +4,7 @@
   "main": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "tsx --watch --inspect src/index.ts",
+    "dev": "tsx --watch --inspect --env-file=.env src/index.ts",
     "dev:debug": "tsx --watch --inspect-brk src/index.ts",
     "test": "jest",
     "lint": "eslint . --ext .ts",
@@ -15,8 +15,11 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/express": "^5.0.0",
     "@types/jest": "latest",
-    "@types/node": "latest",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^22.13.1",
+    "@types/passport": "^1.0.17",
     "eslint": "latest",
     "eslint-config-prettier": "latest",
     "eslint-plugin-prettier": "latest",
@@ -24,5 +27,10 @@
     "prettier": "latest",
     "tsx": "latest",
     "typescript": "latest"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "mongoose": "^8.9.6",
+    "passport": "^0.7.0"
   }
 }
