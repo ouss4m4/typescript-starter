@@ -1,0 +1,28 @@
+{
+  "name": "typescript-starter",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx --watch --inspect src/index.ts",
+    "dev:debug": "tsx --watch --inspect-brk src/index.ts",
+    "test": "jest",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/jest": "latest",
+    "@types/node": "latest",
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-prettier": "latest",
+    "jest": "latest",
+    "prettier": "latest",
+    "tsx": "latest",
+    "typescript": "latest"
+  }
+}
