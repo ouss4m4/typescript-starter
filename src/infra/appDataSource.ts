@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
-import { OrderEvent } from '../Order/infra/OrderEvent.entity';
+import { OrderEventEntity } from '../Order/infra/entities/OrderEvent.entity';
+import { OrderEntity } from '../Order/infra/entities/Order.entity';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -9,8 +10,8 @@ export const AppDataSource = new DataSource({
   password: 'password',
   database: 'tabadulat',
   synchronize: true,
-  logging: true,
-  entities: [OrderEvent],
+  logging: false,
+  entities: [OrderEventEntity, OrderEntity],
 });
 
 export const connectDb = () => AppDataSource.initialize().then((d) => console.log('DB Connected'));

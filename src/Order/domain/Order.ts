@@ -34,4 +34,8 @@ export class Order {
   getEvents(): OrderCreatedEvent[] {
     return this.events;
   }
+
+  getStatus() {
+    return this.status;
+  }
 }

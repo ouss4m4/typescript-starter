@@ -1,8 +1,10 @@
 import { DomainEvent } from '../../shared/events/DomainEvent';
 import { OrderType } from '../domain/OrderTypes';
 
+export const ORDER_CREATED = 'ORDER_CREATED';
+
 export class OrderCreatedEvent implements DomainEvent {
-  eventName = 'OrderCreated';
+  eventName = ORDER_CREATED;
   occurredAt: Date;
 
   constructor(
