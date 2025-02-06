@@ -1,6 +1,7 @@
 import kafka from '../../shared/kafkaClient'; // Import Kafka client
 import { Order } from '../domain/Order';
 import { ORDER_CREATED, OrderCreatedEvent } from '../events/OrderCreated.event';
+import { ORDER_UPDATED, OrderUpdatedEvent } from '../events/OrderUpdated.event';
 import { OrderRepo } from './repos/Order.repo';
 import { OrderReadRepo } from './repos/OrderRead.repo';
 
@@ -15,7 +16,7 @@ export const startConsumer = async () => {
       if (!message.value) {
         return;
       }
-      const event: OrderCreatedEvent = JSON.parse(message.value.toString());
+      const event = JSON.parse(message.value.toString());
 
       if (event.eventName === ORDER_CREATED) {
         const orderCreatedEvent = new OrderCreatedEvent(
@@ -48,6 +49,25 @@ export const startConsumer = async () => {
           const orderRead = new OrderReadRepo();
           await orderRead.saveOrderRead({ ...orderEntity, createdAt: new Date() });
         } catch (error) {}
+      }
+
+      if (event.eventName == ORDER_UPDATED) {
+        console.log('Handling Order Updated Event:', event);
+
+        const orderRepo = new OrderRepo();
+        const orderReadRepo = new OrderReadRepo();
+
+        try {
+          // ✅ Step 1: Update Write Model (orders table)
+          await orderRepo.updateOrderStatus(event.orderId, event.status);
+
+          // ✅ Step 2: Update Read Model (orders_read table)
+          await orderReadRepo.updateOrderReadStatus(event.orderId, event.status);
+
+          console.log(`Order ${event.orderId} status updated to ${event.status}`);
+        } catch (error) {
+          console.error('Error updating order status:', error);
+        }
       }
     },
   });

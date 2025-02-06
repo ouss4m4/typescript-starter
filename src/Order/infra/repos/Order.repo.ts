@@ -22,4 +22,7 @@ export class OrderRepo {
 
     return await this.repo.save(orderData);
   }
+  async updateOrderStatus(orderId: string, status: 'FILLED' | 'CANCELLED') {
+    return await this.repo.update({ id: orderId }, { status });
+  }
 }

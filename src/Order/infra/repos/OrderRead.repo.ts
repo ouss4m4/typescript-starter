@@ -14,6 +14,10 @@ export class OrderReadRepo {
     return await this.repository.save(orderReadEntity);
   }
 
+  async updateOrderReadStatus(orderId: string, status: 'FILLED' | 'CANCELLED') {
+    return await this.repository.update({ orderId }, { status });
+  }
+
   // Optional: Method to fetch an order from the read model (for query)
   async getOrderById(orderId: string) {
     return await this.repository.findOne({ where: { orderId } });
