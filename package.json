@@ -8,7 +8,11 @@
     "dev:debug": "tsx --watch --inspect-brk src/index.ts",
     "test": "jest",
     "lint": "eslint . --ext .ts",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "build": "tsc",
+    "migration:generate": "npm run build && npx typeorm migration:generate -d ./build/src/infra/index.js ./build/src/infra/migrations/migration",
+    "migration:run": "npm run build && npx typeorm migration:run -d ./build/db/index.js",
+    "migration:revert": "npx typeorm migration:revert -d ./build/db/index.js"
   },
   "keywords": [],
   "author": "",
@@ -17,20 +21,27 @@
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/jest": "latest",
-    "@types/mongoose": "^5.11.97",
     "@types/node": "^22.13.1",
-    "@types/passport": "^1.0.17",
+    "@types/pg": "^8.11.11",
+    "dotenv": "^16.4.7",
     "eslint": "latest",
     "eslint-config-prettier": "latest",
     "eslint-plugin-prettier": "latest",
     "jest": "latest",
     "prettier": "latest",
+    "ts-node": "^10.9.2",
     "tsx": "latest",
+    "typeorm-cli": "^1.0.7",
     "typescript": "latest"
   },
   "dependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "express": "^4.21.2",
-    "mongoose": "^8.9.6",
-    "passport": "^0.7.0"
+    "kafka-node": "^5.0.0",
+    "kafkajs": "^2.2.4",
+    "pg": "^8.13.1",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.20"
   }
 }
