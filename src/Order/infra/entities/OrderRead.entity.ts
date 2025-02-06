@@ -1,9 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('orders')
-export class OrderEntity {
+@Entity('orders_read') // Read Model Table
+export class OrderReadEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  orderId: string;
 
   @Column({ type: 'varchar', length: '36' })
   userId: string;
@@ -11,10 +11,10 @@ export class OrderEntity {
   @Column({ type: 'varchar', length: '36' })
   asset: string;
 
-  @Column({ type: 'int' })
+  @Column('decimal')
   quantity: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @Column('decimal')
   price: number;
 
   @Column({ type: 'varchar', length: 4 })
